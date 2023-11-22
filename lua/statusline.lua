@@ -2,19 +2,19 @@ local M = {}
 M.cache = {}
 
 M.mode_map = {
-    ['n'] = { 'NORMAL', '%#StatuslineModeNormal#' },
-    ['v'] = { 'VISUAL', '%#StatuslineModeVisual#' },
+    ['n'] = { 'Normal', '%#StatuslineModeNormal#' },
+    ['v'] = { 'Visual', '%#StatuslineModeVisual#' },
     ['V'] = { 'V·Line', '%#StatuslineModeVisual#' },
     [''] = { 'V·Block', '%#StatuslineModeVisual#' },
     ['s'] = { 'Select', '%#StatuslineModeVisual#' },
     ['S'] = { 'S·Line', '%#StatuslineModeVisual#' },
     [''] = { 'S·Block', '%#StatuslineModeVisual#' },
-    ['i'] = { 'INSERT', '%#StatuslineModeInsert#' },
-    ['R'] = { 'REPLACE', '%#StatuslineModeReplace#' },
-    ['c'] = { 'COMMAND', '%#StatuslineModeCommand#' },
+    ['i'] = { 'Insert', '%#StatuslineModeInsert#' },
+    ['R'] = { 'Replace', '%#StatuslineModeReplace#' },
+    ['c'] = { 'Command', '%#StatuslineModeCommand#' },
     ['r'] = { 'Prompt', '%#StatuslineModeOther#' },
     ['!'] = { 'Shell', '%#StatuslineModeOther#' },
-    ['t'] = { 'TERM', '%#StatuslineModeOther#' }
+    ['t'] = { 'Terminal', '%#StatuslineModeOther#' }
 }
 
 M.diagnostic_levels = {
