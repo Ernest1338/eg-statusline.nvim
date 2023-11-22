@@ -36,7 +36,7 @@ M.create_autocommands = function()
     end
 
     local set_active = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline()' end
-    au({ 'WinEnter', 'BufEnter' }, '*', set_active, 'Set active statusline')
+    au({ 'WinEnter', 'BufEnter', 'InsertEnter' }, '*', set_active, 'Set active statusline')
 end
 
 M.get_diagnostic_count = function(id) return #vim.diagnostic.get(0, { severity = id }) end
