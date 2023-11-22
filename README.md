@@ -2,6 +2,8 @@
 <h3><p align=center><sup>Simplicity oriented neovim statusline plugin</sup></p></h3>
 <br \><br \>
 
+![Screenshot 1](https://user-images.githubusercontent.com/45213563/284986948-15e7f1d4-dbf6-4d4b-8142-c9e4eb7f043e.png)
+
 ## ⚙️ Features
 - Performant (utilizing caches, profiling)
 - <200 lines of Lua
