@@ -1,6 +1,8 @@
 local M = {}
 M.cache = {}
 
+local macro_recording = ""
+
 M.mode_map = {
     ['n'] = { 'Normal', '%#StatuslineModeNormal#' },
     ['v'] = { 'Visual', '%#StatuslineModeVisual#' },
@@ -35,11 +37,19 @@ M.create_autocommands = function()
         vim.api.nvim_create_autocmd(event, { group = augroup, pattern = pattern, callback = callback, desc = desc })
     end
 
-    local set_active = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline()' end
-    au({ 'WinEnter', 'BufEnter', 'InsertEnter', 'RecordingLeave' }, '*', set_active, 'Set active statusline')
+    local statusline_redraw = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline()' end
 
-    local set_recording = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline_macro()' end
-    au({ 'RecordingEnter' }, '*', set_recording, 'Set macro statusline')
+    au({ 'WinEnter', 'BufEnter', 'InsertEnter' }, '*', statusline_redraw, 'Set active statusline')
+
+    au({ 'RecordingEnter' }, '*', function()
+        macro_recording = ' [REC] '
+        statusline_redraw()
+    end, 'Set macro statusline')
+
+    au({ 'RecordingLeave' }, '*', function()
+        macro_recording = ''
+        statusline_redraw()
+    end, 'Set macro statusline')
 end
 
 M.get_diagnostic_count = function(id) return #vim.diagnostic.get(0, { severity = id }) end
@@ -130,16 +140,12 @@ end
 function M.get_statusline()
     -- local start = vim.loop.hrtime()
     local mode_hl, mode = M.get_mode()
-    return mode ..
+    return macro_recording .. mode ..
         M.get_git_info() ..
         M.get_diagnostics() .. M.get_filename() .. '%=' .. M.get_fileinfo() .. M.get_location(mode_hl)
     -- local finish = vim.loop.hrtime()
     -- print("elapsed: " .. (finish - start) / 1e6 .. "ms")
     -- return out
-end
-
-function M.get_statusline_macro()
-    return ' [REC] ' .. M.get_statusline()
 end
 
 function M.create_default_hl()
