@@ -36,7 +36,10 @@ M.create_autocommands = function()
     end
 
     local set_active = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline()' end
-    au({ 'WinEnter', 'BufEnter', 'InsertEnter' }, '*', set_active, 'Set active statusline')
+    au({ 'WinEnter', 'BufEnter', 'InsertEnter', 'RecordingLeave' }, '*', set_active, 'Set active statusline')
+
+    local set_recording = function() vim.wo.statusline = '%!v:lua.Statusline.get_statusline_macro()' end
+    au({ 'RecordingEnter' }, '*', set_recording, 'Set macro statusline')
 end
 
 M.get_diagnostic_count = function(id) return #vim.diagnostic.get(0, { severity = id }) end
@@ -133,6 +136,10 @@ function M.get_statusline()
     -- local finish = vim.loop.hrtime()
     -- print("elapsed: " .. (finish - start) / 1e6 .. "ms")
     -- return out
+end
+
+function M.get_statusline_macro()
+    return ' [REC] ' .. M.get_statusline()
 end
 
 function M.create_default_hl()
