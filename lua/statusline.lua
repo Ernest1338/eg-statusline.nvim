@@ -122,9 +122,9 @@ function M.get_git_info()
 end
 
 function M.get_diagnostics()
+    if vim.bo.filetype == '' or M.isnt_normal_buffer() then return '' end
     local hasnt_attached_client = next(vim.lsp.buf_get_clients()) == nil
-    local dont_show_lsp = M.isnt_normal_buffer() or hasnt_attached_client
-    if dont_show_lsp then return '' end
+    if hasnt_attached_client then return '' end
 
     local t = {}
     for _, level in ipairs(M.diagnostic_levels) do
