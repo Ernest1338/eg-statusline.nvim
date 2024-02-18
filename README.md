@@ -18,6 +18,10 @@
 ```lua
 use "Ernest1338/eg-statusline.nvim"
 ```
+- With [echasnovski/mini.deps](https://github.com/echasnovski/mini.deps)
+```lua
+add("Ernest1338/eg-statusline.nvim")
+```
 
 ## 🔧 Configuration
 
@@ -34,6 +38,14 @@ use {
         require("eg-statusline").setup()
     end
 }
+```
+
+- For [echasnovski/mini.deps](https://github.com/echasnovski/mini.deps)
+```lua
+now(function()
+    add("Ernest1338/eg-statusline.nvim")
+    require("statusline").setup()
+end)
 ```
 
 ## ⚡ Requirements
