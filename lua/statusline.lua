@@ -162,7 +162,7 @@ function M.create_default_hl()
     set_default_hl('StatuslineModeOther', { link = 'IncSearch' })
 
     set_default_hl('StatuslineGitInfo', { link = 'StatusLine' })
-    set_default_hl('StatuslineDiagnostic', { link = 'WildMenu' })
+    set_default_hl('StatuslineDiagnostic', { link = 'StatusLine' })
     set_default_hl('StatuslineFilename', { link = 'StatusLineNC' })
     set_default_hl('StatuslineFileinfo', { link = 'StatusLine' })
 end
