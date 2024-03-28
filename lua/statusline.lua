@@ -110,15 +110,12 @@ end
 function M.get_git_info()
     if M.isnt_normal_buffer() then return '' end
 
-    local head = vim.b.gitsigns_head or '-'
-    local signs = vim.b.gitsigns_status or ''
+    local head = vim.b.gitsigns_head or ''
+    local signs = vim.b.gitsigns_status or vim.b.minidiff_summary_string or ''
     local icon = ''
 
-    if signs == '' then
-        if head == '-' or head == '' then return '' end
-        return string.format('%%#%s# %s %s ', 'StatuslineGitInfo', icon, head)
-    end
-    return string.format('%%#%s# %s %s %s ', 'StatuslineGitInfo', icon, head, signs)
+    if head == '' and signs == '' then return '' end
+    return string.format('%%#StatuslineGitInfo# %s%s %s ', icon, head, signs)
 end
 
 function M.get_diagnostics()
