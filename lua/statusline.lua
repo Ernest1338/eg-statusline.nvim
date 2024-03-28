@@ -69,11 +69,11 @@ M.get_filesize = function()
     local size = vim.fn.getfsize(vim.fn.getreg('%'))
     local out
     if size < 1024 then
-        out = string.format('%dB', size)
+        out = string.format('%dB ', size)
     elseif size < 1048576 then
-        out = string.format('%.2fKiB', size / 1024)
+        out = string.format('%.2fKiB ', size / 1024)
     else
-        out = string.format('%.2fMiB', size / 1048576)
+        out = string.format('%.2fMiB ', size / 1048576)
     end
     M.cache["filesize"] = out
     return M.cache["filesize"]
@@ -100,7 +100,7 @@ function M.get_fileinfo()
     local format = vim.bo.fileformat
     local size = M.get_filesize()
 
-    return string.format('%%#%s# %s %s[%s] %s ', 'StatuslineFileinfo', filetype, encoding, format, size)
+    return string.format('%%#%s# %s %s[%s] %s', 'StatuslineFileinfo', filetype, encoding, format, size)
 end
 
 function M.get_location(hl)
@@ -115,7 +115,7 @@ function M.get_git_info()
     local icon = ''
 
     if head == '' and signs == '' then return '' end
-    return string.format('%%#StatuslineGitInfo# %s%s %s ', icon, head, signs)
+    return string.format('%%#%s# %s%s %s', 'StatuslineGitInfo', icon, head, signs)
 end
 
 function M.get_diagnostics()
@@ -130,8 +130,8 @@ function M.get_diagnostics()
     end
 
     local icon = ''
-    if vim.tbl_count(t) == 0 then return ('%s - '):format(icon) end
-    return string.format('%%#%s#%s %s ', 'StatuslineDiagnostic', icon, table.concat(t, ' '))
+    if vim.tbl_count(t) == 0 then return string.format('%%#%s# %s - ', 'StatuslineDiagnostic', icon) end
+    return string.format('%%#%s# %s %s ', 'StatuslineDiagnostic', icon, table.concat(t, ' '))
 end
 
 function M.get_statusline()
