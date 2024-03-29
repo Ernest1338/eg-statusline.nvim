@@ -115,7 +115,7 @@ function M.get_git_info()
     local icon = ''
 
     if head == '' and signs == '' then return '' end
-    return string.format('%%#%s# %s%s %s', 'StatuslineGitInfo', icon, head, signs)
+    return string.format('%%#%s# %s %s %s', 'StatuslineGitInfo', icon, head, signs)
 end
 
 function M.get_diagnostics()
