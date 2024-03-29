@@ -114,8 +114,11 @@ function M.get_git_info()
     local signs = vim.b.gitsigns_status or vim.b.minidiff_summary_string or ''
     local icon = ''
 
+    if head ~= '' then head = ' ' .. head end
+    if signs ~= '' then signs = ' ' .. signs end
+
     if head == '' and signs == '' then return '' end
-    return string.format('%%#%s# %s %s %s', 'StatuslineGitInfo', icon, head, signs)
+    return string.format('%%#%s# %s%s%s ', 'StatuslineGitInfo', icon, head, signs)
 end
 
 function M.get_diagnostics()
